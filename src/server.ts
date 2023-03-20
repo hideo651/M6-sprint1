@@ -7,6 +7,6 @@ import AppDataSource from "./data-source";
   });
 
   app.listen(3333, () => {
-    console.log("Servidor executando na porta 3333asdsa");
+    console.log("Servidor executando na porta 3333");
   });
 })();
