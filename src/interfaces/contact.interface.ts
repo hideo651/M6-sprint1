@@ -4,6 +4,7 @@ export interface ICreateContact {
   name: string;
   email: string;
   cellphone: string;
+  user: IUser;
 }
 
 export interface IContact {
