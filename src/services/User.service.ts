@@ -1,4 +1,8 @@
-import { ICreateUser, IUserLogin } from "../interfaces/user.interface";
+import {
+  ICreateUser,
+  IUserLogin,
+  IUserUpdate,
+} from "../interfaces/user.interface";
 import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 import { userRepository } from "../repositories/user.repository";
@@ -48,5 +52,35 @@ export class UserService {
     });
 
     return token;
+  }
+
+  async update(payload: IUserUpdate, userId: string) {
+    const { cellphone, email, name, password } = payload;
+
+    const user = await userRepository.findOneBy({ id: userId });
+
+    const keys = Object.keys(payload);
+
+    if (
+      keys.includes("id") ||
+      keys.includes("contacts") ||
+      keys.includes("createdAt")
+    ) {
+      throw new UnauthorizedError(
+        "Não é possível modificar os campos ID, createdAt e contacts"
+      );
+    }
+
+    const updateUser = userRepository.create({
+      ...user,
+      email,
+      cellphone,
+      name,
+      password,
+    });
+
+    await userRepository.save(updateUser);
+
+    return instanceToInstance(updateUser);
   }
 }

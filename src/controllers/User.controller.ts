@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { UserService } from "../services/User.service";
-import { ICreateUser, IUserLogin } from "../interfaces/user.interface";
+import {
+  ICreateUser,
+  IUserLogin,
+  IUserUpdate,
+} from "../interfaces/user.interface";
 
 export class UserController {
   async create(req: Request, res: Response) {
@@ -15,5 +19,14 @@ export class UserController {
     const data = await new UserService().login(payload);
 
     return res.status(200).json({ token: data });
+  }
+
+  async update(req: Request, res: Response) {
+    const payload: IUserUpdate = req.body;
+    const { id } = req.user;
+
+    const data = await new UserService().update(payload, id);
+
+    return res.status(200).json(data);
   }
 }

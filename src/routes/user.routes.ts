@@ -17,3 +17,9 @@ userRoutes.post(
   userMiddleware.emailExist,
   userController.create
 );
+userRoutes.patch(
+  "/",
+  userMiddleware.tokenExists,
+  dataMiddleware.ensureData(userSchemas.update),
+  userController.update
+);
