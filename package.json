@@ -26,6 +26,7 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "0.3.10"
+    "typeorm": "0.3.10",
+    "yup": "0.32.11"
   }
 }
