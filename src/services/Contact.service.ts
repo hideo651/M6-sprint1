@@ -1,3 +1,5 @@
+import { number } from "yup";
+import { ConflictError, BadRequestError } from "../helpers/Errors.helper";
 import { ICreateContact } from "../interfaces/contact.interface";
 import { contactRepository } from "../repositories/contact.repository";
 import { userRepository } from "../repositories/user.repository";
@@ -5,8 +7,6 @@ import { userRepository } from "../repositories/user.repository";
 export class ContactService {
   async create(payload: ICreateContact, userId: string) {
     const { cellphone, name, email } = payload;
-    console.log(payload);
-    console.log(userId);
 
     const foundUser = await userRepository.findOneBy({ id: userId });
 
@@ -23,11 +23,31 @@ export class ContactService {
     return newContact;
   }
 
+  async delete(contactId: string) {
+    if (!contactId) {
+      throw new BadRequestError("Informe o ID do contato");
+    }
+
+    try {
+      // const contacts = await contactRepository.findOneBy({ id: contactId });
+
+      // if (!contacts?.isActive) {
+      //   throw new ConflictError("Contato inativo");
+      // }
+
+      // await contactRepository.update(contactId, { isActive: false });
+
+      return 204;
+    } catch (error) {
+      throw new BadRequestError("ID inválido");
+    }
+  }
+
   async getUserContacts(userId: string) {
     const foundUser = await userRepository.findOneBy({ id: userId });
 
     const contacts = await contactRepository.find({
-      where: { user: { id: foundUser!.id } },
+      where: { user: { id: foundUser!.id }, isActive: true },
       relations: { user: true },
     });
 

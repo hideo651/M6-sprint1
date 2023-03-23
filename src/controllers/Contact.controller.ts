@@ -10,6 +10,14 @@ export class ContactController {
     return res.status(200).json(contact);
   }
 
+  async delete(req: Request, res: Response) {
+    const { id } = req.body;
+
+    const status = await new ContactService().delete(id);
+
+    return res.sendStatus(status);
+  }
+
   async getUserContacts(req: Request, res: Response) {
     const { id } = req.user;
     const contacts = await new ContactService().getUserContacts(id);

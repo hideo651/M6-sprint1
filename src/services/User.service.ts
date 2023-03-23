@@ -71,12 +71,27 @@ export class UserService {
       );
     }
 
+    if (password) {
+      const hashPassword = await bcrypt.hash(password!, 10);
+
+      const updateUser = userRepository.create({
+        ...user,
+        email,
+        cellphone,
+        name,
+        password: hashPassword,
+      });
+
+      await userRepository.save(updateUser);
+
+      return instanceToInstance(updateUser);
+    }
+
     const updateUser = userRepository.create({
       ...user,
       email,
       cellphone,
       name,
-      password,
     });
 
     await userRepository.save(updateUser);

@@ -13,3 +13,4 @@ contactRoutes.get(
   userMiddleware.tokenExists,
   contactController.getUserContacts
 );
+contactRoutes.delete("/", userMiddleware.tokenExists, contactController.delete);

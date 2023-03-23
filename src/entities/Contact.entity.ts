@@ -22,6 +22,9 @@ class Contact {
   @Column({ length: 20, nullable: false })
   cellphone: string;
 
+  @Column({ default: true })
+  isActive: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 
