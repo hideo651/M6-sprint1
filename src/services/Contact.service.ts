@@ -28,19 +28,16 @@ export class ContactService {
       throw new BadRequestError("Informe o ID do contato");
     }
 
-    try {
-      const contacts = await contactRepository.findOneBy({ id: contactId });
+    const contacts = await contactRepository.findOneBy({ id: contactId });
+    console.log;
 
-      if (!contacts?.isActive) {
-        throw new ConflictError("Contato inativo");
-      }
-
-      await contactRepository.update(contactId, { isActive: false });
-
-      return 204;
-    } catch (error) {
-      throw new BadRequestError("ID inválido");
+    if (!contacts?.isActive) {
+      throw new ConflictError("Contato inativo");
     }
+
+    await contactRepository.update(contactId, { isActive: false });
+
+    return 204;
   }
 
   async getUserContacts(userId: string) {
