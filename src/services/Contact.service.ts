@@ -29,13 +29,13 @@ export class ContactService {
     }
 
     try {
-      // const contacts = await contactRepository.findOneBy({ id: contactId });
+      const contacts = await contactRepository.findOneBy({ id: contactId });
 
-      // if (!contacts?.isActive) {
-      //   throw new ConflictError("Contato inativo");
-      // }
+      if (!contacts?.isActive) {
+        throw new ConflictError("Contato inativo");
+      }
 
-      // await contactRepository.update(contactId, { isActive: false });
+      await contactRepository.update(contactId, { isActive: false });
 
       return 204;
     } catch (error) {

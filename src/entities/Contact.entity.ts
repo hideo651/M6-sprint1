@@ -28,8 +28,7 @@ class Contact {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.id)
-  @JoinColumn()
+  @ManyToOne(() => User, (user) => user.contacts)
   user: User;
 }
 

@@ -2,6 +2,7 @@ import {
   ICreateUser,
   IUserLogin,
   IUserUpdate,
+  IUser,
 } from "../interfaces/user.interface";
 import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -26,6 +27,21 @@ export class UserService {
     await userRepository.save(newUser);
 
     return instanceToInstance(newUser);
+  }
+
+  async get(userId: string) {
+    const user: IUser = await userRepository.findOneOrFail({
+      where: { id: userId },
+      relations: { contacts: true },
+    });
+
+    const filteredContacts = user.contacts.filter(
+      (contacts) => contacts.isActive === true
+    );
+
+    const filteredData = { ...user, contacts: filteredContacts };
+
+    return filteredData;
   }
 
   async login(payload: IUserLogin) {

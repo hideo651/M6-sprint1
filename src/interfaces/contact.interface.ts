@@ -11,6 +11,7 @@ export interface IContact {
   name: string;
   email: string;
   cellphone: string;
-  createdAt: string;
+  createdAt: Date;
   user: IUser;
+  isActive: boolean;
 }

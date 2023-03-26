@@ -23,3 +23,4 @@ userRoutes.patch(
   dataMiddleware.ensureData(userSchemas.update),
   userController.update
 );
+userRoutes.get("/", userMiddleware.tokenExists, userController.get);

@@ -21,6 +21,14 @@ export class UserController {
     return res.status(200).json({ token: data });
   }
 
+  async get(req: Request, res: Response) {
+    const { id } = req.user;
+
+    const data = await new UserService().get(id);
+
+    return res.status(200).json(data);
+  }
+
   async update(req: Request, res: Response) {
     const payload: IUserUpdate = req.body;
     const { id } = req.user;
