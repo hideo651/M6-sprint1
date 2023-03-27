@@ -114,4 +114,12 @@ export class UserService {
 
     return instanceToInstance(updateUser);
   }
+
+  async getUsers(): Promise<IUser[]> {
+    const users = await userRepository.find();
+
+    console.log(users);
+
+    return users;
+  }
 }

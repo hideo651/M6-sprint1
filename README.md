@@ -159,6 +159,51 @@ Essa rota só pode ser acessada por usuários autenticados (token).
 }
 ```
 
+<br>
+
+#
+
+### 4) Pegar todos os usuários cadastrados - GET /users/all
+
+Essa rota só pode ser acessada por usuários autenticados (token)
+
+<br>
+
+`Exemplo de response - status 200`
+
+```javascript
+[
+  {
+    id: "a0171f28-afce-4259-aa5b-2fe8f5882b3e",
+    name: "jose",
+    email: "lima@gmail.com",
+    cellphone: "(12) 3433334",
+    createdAt: "2023-03-23T21:34:21.495Z",
+  },
+  {
+    id: "f4d59c5b-621d-4a00-8b95-9407782b2e45",
+    name: "Mike",
+    email: "mike@mail.com",
+    cellphone: "(11) 34655700",
+    createdAt: "2023-03-23T21:46:51.116Z",
+  },
+  {
+    id: "8306df89-b8cf-4f27-b73b-55e3ec347219",
+    name: "Teste03",
+    email: "teste03@mail.com",
+    cellphone: "(19) 34330700",
+    createdAt: "2023-03-24T17:48:25.783Z",
+  },
+  {
+    id: "84f350e7-21f6-4b59-80f7-61ada50ed586",
+    name: "Gustavo Ferreira",
+    email: "gustavoferreira@email.com",
+    cellphone: "(43) 96656234",
+    createdAt: "2023-03-25T23:09:45.951Z",
+  },
+];
+```
+
 #
 
 ## Rotas do Login

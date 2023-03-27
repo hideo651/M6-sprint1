@@ -37,4 +37,10 @@ export class UserController {
 
     return res.status(200).json(data);
   }
+
+  async getUsers(req: Request, res: Response) {
+    const data = await new UserService().getUsers();
+
+    return res.status(200).json(data);
+  }
 }
