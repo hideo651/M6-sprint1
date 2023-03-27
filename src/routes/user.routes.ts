@@ -24,3 +24,4 @@ userRoutes.patch(
   userController.update
 );
 userRoutes.get("/", userMiddleware.tokenExists, userController.get);
+userRoutes.get("/all", userMiddleware.tokenExists, userController.getUsers);
