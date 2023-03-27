@@ -31,6 +31,14 @@ yarn install
 
 <br>
 
+Rode as migrations para que seja criado as tabelas no banco de dados do PostgreSQL
+
+```
+yarn typeorm migration:run -d src/data-source
+```
+
+<br>
+
 **OBS: Configure as variáveis de ambiente no seu _.env_, passando as credenciais corretas para conectar em seu banco local.**
 
 <br>
