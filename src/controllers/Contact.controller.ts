@@ -1,5 +1,8 @@
 import { Response, Request } from "express";
-import { ICreateContact } from "../interfaces/contact.interface";
+import {
+  IContactUpdate,
+  ICreateContact,
+} from "../interfaces/contact.interface";
 import { ContactService } from "../services/Contact.service";
 
 export class ContactController {
@@ -21,5 +24,14 @@ export class ContactController {
     const contacts = await new ContactService().getUserContacts(id);
 
     return res.status(200).json(contacts);
+  }
+
+  async update(req: Request, res: Response) {
+    const payload: IContactUpdate = req.body;
+    const contactId: string = req.params.id;
+
+    const data = await new ContactService().update(payload, contactId);
+
+    return res.status(200).json(data);
   }
 }

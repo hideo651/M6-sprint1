@@ -317,3 +317,32 @@ Caso esteja tudo certo, essa rota irá retornar um status 204 (sem conteúdo)
 	"message": "Contato inativo"
 }
 ```
+
+#
+
+### 3) Update de um contato - PATCH /contact/:id
+
+Informe o ID do contato na URL da requisição e informe no body se você quer alterar o name, email ou cellphone.
+
+`Exemplo de body`
+
+```
+  email: luna.star@mail.com,
+	name :Luna Star,
+	cellphone: (11) 9785424
+
+```
+
+`Exemplo de response - status 200`
+
+```javascript
+{
+	"id": "9a34408d-0ae7-4963-9f9e-90323ac87a92",
+	"name": "Luna Star",
+	"email": "luna.star@mail.com",
+	"cellphone": "(11) 9785424",
+	"isActive": true,
+	"createdAt": "2023-03-27T20:18:32.557Z"
+}
+
+```
