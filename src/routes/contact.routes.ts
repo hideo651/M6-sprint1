@@ -26,3 +26,9 @@ contactRoutes.delete(
   userMiddleware.tokenExists,
   contactController.delete
 );
+contactRoutes.patch(
+  "/:id",
+  userMiddleware.tokenExists,
+  dataMiddleware.ensureData(ContactSchema.update),
+  contactController.update
+);

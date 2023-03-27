@@ -15,3 +15,9 @@ export interface IContact {
   user: IUser;
   isActive: boolean;
 }
+
+export interface IContactUpdate {
+  name?: string;
+  email?: string;
+  cellphone?: string;
+}

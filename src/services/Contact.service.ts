@@ -1,6 +1,9 @@
 import { number } from "yup";
 import { ConflictError, BadRequestError } from "../helpers/Errors.helper";
-import { ICreateContact } from "../interfaces/contact.interface";
+import {
+  IContactUpdate,
+  ICreateContact,
+} from "../interfaces/contact.interface";
 import { contactRepository } from "../repositories/contact.repository";
 import { userRepository } from "../repositories/user.repository";
 
@@ -10,7 +13,13 @@ export class ContactService {
 
     const foundUser = await userRepository.findOneBy({ id: userId });
 
-    console.log(foundUser);
+    const contactEmail = await contactRepository.findOneBy({ email });
+
+    if (contactEmail) {
+      {
+        throw new ConflictError("E-mail de contato já cadastrado");
+      }
+    }
 
     const newContact = contactRepository.create({
       name,
@@ -49,5 +58,28 @@ export class ContactService {
     });
 
     return contacts;
+  }
+
+  async update(payload: IContactUpdate, contactId: string) {
+    const { cellphone, name, email } = payload;
+
+    const contact = await contactRepository.findOneBy({ id: contactId });
+
+    console.log("**************************");
+
+    console.log(contact);
+
+    const updateContact = contactRepository.create({
+      ...contact,
+      cellphone,
+      email,
+      name,
+    });
+
+    await contactRepository.save(updateContact);
+
+    const contactResponse = { ...contact, ...updateContact };
+
+    return contactResponse;
   }
 }
